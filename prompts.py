@@ -38,5 +38,10 @@ If you have the answer, output it as the Answer.
 
 Answer: The mass of Earth times 2 is 1.1944e25.
 
+Note: if you are asked a general question that is not related to tools you have (ex: How are you?) then you must respond like this:
+Thought: This query doesn't belong to any of my tools. Therefore, I don't need to use any tools and I should answer from my own knowledge.
+Action: None : I am fine, I am pleased to help you.
+PAUSE
+
 Now it's your turn:
 """.strip()
