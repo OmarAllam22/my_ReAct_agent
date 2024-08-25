@@ -1,7 +1,6 @@
 from langchain_core.prompts import ChatPromptTemplate
 from tools import calculate,get_planet_mass
 import re
-
 class ReActAgent:
     def __init__(self, model, tools, system:str=""):
         self.model = model
@@ -27,12 +26,12 @@ class ReActAgent:
         response = self._execute(Query, verbose=verbose)
         for i in range(15):
             if "PAUSE" in response and "Action" in response:
-                tool, tool_input =  re.findall(r"Action: ([a-z0-9_]+) : (.+)", response, re.IGNORECASE)[0]
+                tool, tool_input =  re.findall(r"Action: ([a-z0-9_]+): (.+)", response, re.IGNORECASE)[0]
                 if tool in self.tools:
                     tool_res = eval(f"{tool}('{tool_input}')")
                     response = f"Observation: {tool_res}"
                 else:
-                    response = f"Observation: Tool not found in accessed tools but I answered from my own knowledge with this answer: {tool_input}"
+                    response = f"Observation: Tool not found in accessed tools"
             elif "answer" in response.lower():
                 response = "Answer: "+ re.findall(r"Answer: (.+)", response, re.IGNORECASE)[0]
                 return response
